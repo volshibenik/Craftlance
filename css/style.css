@@ -446,6 +446,16 @@ template {
   display: none;
 }
 
+::selection {
+  background: #ddd;
+  /* Safari */
+}
+
+::-moz-selection {
+  background: #ddd;
+  /* Firefox */
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
@@ -474,6 +484,21 @@ ul, li {
 .container {
   max-width: 1170px;
   margin: 0 auto;
+}
+
+@media (max-width: 1170px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 768px;
+  }
 }
 
 /*HEADER*/
@@ -506,7 +531,7 @@ ul, li {
 }
 
 @supports (display: flex) {
-  .main-header .container {
+  .main-header .contacts {
     display: flex;
     justify-content: space-between;
   }
@@ -525,6 +550,49 @@ ul, li {
   height: 80px;
   background-color: #fff;
   color: #000;
+}
+
+.main-nav .menu {
+  width: 40px;
+  height: 40px;
+  display: none;
+  cursor: pointer;
+}
+
+.main-nav .menu span {
+  position: relative;
+  background-color: #111;
+  height: 2px;
+  width: 100%;
+  display: block;
+  top: 12px;
+}
+
+.main-nav .menu span:before, .main-nav .menu span:after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  background-color: #111;
+  display: block;
+  top: -12px;
+  transition: .3s;
+}
+
+.main-nav .menu span:after {
+  top: 12px;
+}
+
+.main-nav .menu.on span {
+  background-color: transparent;
+}
+
+.main-nav .menu.on span:before {
+  transform: translateY(12px) rotate(45deg);
+}
+
+.main-nav .menu.on span:after {
+  transform: translateY(-12px) rotate(-45deg);
 }
 
 .main-nav .logo {
@@ -546,10 +614,15 @@ ul, li {
   margin-right: 40px;
   text-transform: capitalize;
   font-size: 14px;
+  transition: .4s;
 }
 
 .main-nav .nav-list li:last-child {
   margin-right: 0;
+}
+
+.main-nav .nav-list li:hover {
+  color: #ccc;
 }
 
 .main-nav .sign-link {
@@ -559,12 +632,21 @@ ul, li {
   font-weight: 500;
   color: #5db442;
   font-size: 12px;
+  transition: .4s;
+}
+
+.main-nav .sign-link:hover {
+  background-color: #5db442;
+  color: #fff;
 }
 
 @supports (display: flex) {
   .main-nav .container {
     display: flex;
     justify-content: space-between;
+  }
+  .main-nav .logo {
+    float: none;
   }
   .main-nav .nav-list {
     float: none;
@@ -573,6 +655,56 @@ ul, li {
   }
   .main-nav .nav-list li {
     float: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    height: auto;
+  }
+  .main-nav .container {
+    padding: 0;
+    display: block;
+  }
+  .main-nav .nav-list {
+    display: none;
+    width: 100%;
+    text-align: center;
+  }
+  .main-nav .nav-list li {
+    display: block;
+    margin-right: 0;
+    color: #000;
+  }
+  .main-nav .nav-list li a {
+    display: block;
+    color: #000;
+  }
+  .main-nav .nav-list li a:not(.sign-link):hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #000;
+  }
+  .main-nav .nav-list li a.sign-link {
+    display: inline;
+    padding: 20px 50px;
+    color: #5db442;
+  }
+  .main-nav .nav-list li a.sign-link:hover {
+    color: #fff;
+  }
+  .main-nav .logo {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .main-nav .menu {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+  }
+  .main-nav .menu.on ~ .nav-list {
+    display: block;
   }
 }
 
@@ -754,6 +886,7 @@ ul, li {
   background-color: #fff;
 }
 
+/*SERVICES*/
 .s-services {
   text-align: center;
   padding-bottom: 100px;
@@ -971,6 +1104,7 @@ ul, li {
   margin-right: 5px;
 }
 
+/*ANALYTICS*/
 .s-analytics {
   text-align: center;
   background: #eee url(../img/analytics-bg.jpg) center;
@@ -1000,6 +1134,13 @@ ul, li {
   width: 23%;
   transition: .2s;
   float: left;
+}
+
+@media (max-width: 1170px) {
+  .s-analytics .col-3 {
+    margin: 2%;
+    width: 46%;
+  }
 }
 
 .s-analytics .col-3:hover {
@@ -1036,6 +1177,7 @@ ul, li {
   color: #777;
 }
 
+/*Top FOOTER*/
 .main-footer {
   padding-top: 40px;
   background-color: #efefef;
@@ -1108,6 +1250,7 @@ ul, li {
   .main-footer .flex-wrapper {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
   .main-footer .flex-wrapper .footer-col {
     float: none;
@@ -1134,6 +1277,18 @@ ul, li {
   margin-left: 10%;
 }
 
+@media (max-width: 1024px) {
+  .main-footer .form-col {
+    width: 60%;
+    margin: 0 20% 3%;
+  }
+  .main-footer .col-15 {
+    width: 20%;
+    margin: 2% 6.6%;
+    line-height: 45px;
+  }
+}
+
 hr {
   background-color: #e1e2e3;
   height: 1px;
@@ -1141,6 +1296,7 @@ hr {
   margin: 0;
 }
 
+/*Bottom FOOTER*/
 .copyright {
   background-color: #efefef;
   padding: 20px 0;
